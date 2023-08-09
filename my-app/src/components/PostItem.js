@@ -6,11 +6,11 @@ function PostItem(props) {
     <div>
         {props.savedPosts.map(savedPost => {
                         return (
-                            <div key={savedPost.title} className={css.SearchItem}>
-                                <p>{savedPost.title}</p>
-                                <p>{savedPost.name}</p>
-                                <img src={savedPost.image}></img>
-                                <p>{savedPost.description}</p>
+                            <div key={savedPost.id} className={css.SearchItem}>
+                                <p>{savedPost.type}</p>
+                                <p>{savedPost.user}</p>
+                                <img src={savedPost.webformatURL}></img>
+                                <p>{savedPost.tags}</p>
                             </div>
                         )
         })}

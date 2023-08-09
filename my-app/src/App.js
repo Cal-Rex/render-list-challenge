@@ -1,7 +1,7 @@
 import css from './App.module.css';
 import Content from './components/Content';
 // import Sidebar from "./components/Sidebar";
-import ContentHooks from './components/ContentHooks';
+// import ContentHooks from './components/ContentHooks';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       {/* Add your components here */}
       {/* <Sidebar /> */}
       {/* <Content /> */}
-      <ContentHooks />
+      <Content />
     </div>
   );
 }

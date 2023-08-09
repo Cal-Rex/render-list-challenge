@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PostItem from './PostItem'
-import { savedPosts } from '../posts.json'
 import css from '../components/css/Content.module.css'
 import Loader from './Loader'
+import axios from 'axios'
+import API_KEY from '../secrets'
 
 export class Content extends Component {
     constructor(props) {
@@ -10,27 +11,34 @@ export class Content extends Component {
 
         this.state = {
             isLoaded: false,
-            posts: []
+            posts: [],
+            savedPosts: []
         }
+    }
+
+    componentDidMount() {
+        this.fetchImages();
+    }
+
+    async fetchImages() {
+        const response = await axios.get(`https://pixabay.com/api/?key=${API_KEY}&per_page=100`);
+        const fetchedPosts = response.data.hits
+        console.log(fetchedPosts)
+        this.setState({
+            isLoaded: true,
+            posts: fetchedPosts,
+            savedPosts: fetchedPosts
+        })
     }
 
     handleChange = (event) => {
         const name = event.target.value.toLowerCase()
-        const filteredPosts = savedPosts.filter(post => {
-            return post.name.toLowerCase().includes(name)
+        const filteredPosts = this.state.savedPosts.filter(post => {
+            return post.user.toLowerCase().includes(name)
         })
         this.setState({
             posts: filteredPosts
         })
-    } 
-
-    componentDidMount() {
-        setTimeout(()=>{
-            this.setState({
-                isLoaded: true,
-                posts: savedPosts
-            })
-        }, 2000)
     }
 
     render() {
